@@ -1,6 +1,7 @@
 package java.genric_utilities;
 
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.Duration;
 
@@ -47,10 +48,11 @@ public class BaseClass
 		System.out.println("DataBase connected succesfully");
 	}
 
+
 	//Launching the Browser
 	@Parameters("BROWSER")
 	@BeforeClass(alwaysRun = true)
-	public void launchBrowser()
+	public void launchBrowser() throws IOException
 	{
 		//Handling browser pop-ups
 		ChromeOptions chromeOpt = new ChromeOptions();
@@ -62,3 +64,5 @@ public class BaseClass
 
 		//String Browser = propUtil.readDataFromPropertyFile("browser");
 		String Url = propUtil.readDataFromPropertyFile("url");
+	}
+}

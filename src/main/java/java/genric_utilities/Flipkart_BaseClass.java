@@ -22,8 +22,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-import vtiger_POM.Login_And_Logout_Vtiger;
-import vtiger_POM.Logout_page;
+//import vtiger_POM.Login_And_Logout_Vtiger;
+//import vtiger_POM.Logout_page;
 
 public class Flipkart_BaseClass 
 {
