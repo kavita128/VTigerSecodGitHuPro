@@ -1,4 +1,4 @@
-package genric_utilities;
+package java.genric_utilities;
 
 import org.testng.ISuite;
 import org.testng.ISuiteListener;

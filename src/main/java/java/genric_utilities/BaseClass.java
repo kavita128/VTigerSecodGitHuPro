@@ -50,7 +50,7 @@ public class BaseClass
 	//Launching the Browser
 	@Parameters("BROWSER")
 	@BeforeClass(alwaysRun = true)
-	public void launchBrowser(@Optional("chrome") String Browser) throws IOException
+	public void launchBrowser()
 	{
 		//Handling browser pop-ups
 		ChromeOptions chromeOpt = new ChromeOptions();
@@ -62,34 +62,3 @@ public class BaseClass
 
 		//String Browser = propUtil.readDataFromPropertyFile("browser");
 		String Url = propUtil.readDataFromPropertyFile("url");
-
-		if(Browser.contains("chrome"))
-		{
-			driver=new ChromeDriver(chromeOpt);
-			
-		}
-		if(Browser.equalsIgnoreCase("edge"))
-		{
-			driver=new EdgeDriver(edgOpt);
-		}
-		if(Browser.equalsIgnoreCase("firefox"))
-		{
-			driver=new FirefoxDriver(fireOpt);
-		}
-		
-		wdriver.set(driver);
-
-		wbdUtil.maximizeWindow(driver);
-		
-		//open application
-		driver.get(Url);
-		wbdUtil.implicitWait(driver, Duration.ofSeconds(10));
-		System.out.println("browser launched sucessfully");
-
-	
-
-	
-
-	}
-
-}

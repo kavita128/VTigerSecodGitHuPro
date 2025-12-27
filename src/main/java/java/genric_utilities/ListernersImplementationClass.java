@@ -1,4 +1,4 @@
- package genric_utilities;
+ package java.genric_utilities;
 
 import java.io.File;
 import java.io.IOException;
