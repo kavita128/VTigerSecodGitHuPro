@@ -1,6 +1,7 @@
 package java.genric_utilities;
 
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.Duration;
 
@@ -21,6 +22,9 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentTest;
+
+import vtiger_POM.Login_And_Logout_Vtiger;
+import vtiger_POM.Logout_page;
 
 
 
@@ -62,3 +66,75 @@ public class BaseClass
 
 		//String Browser = propUtil.readDataFromPropertyFile("browser");
 		String Url = propUtil.readDataFromPropertyFile("url");
+		if(Browser.contains("chrome"))
+		{
+			driver=new ChromeDriver(chromeOpt);
+			
+		}
+		if(Browser.equalsIgnoreCase("edge"))
+		{
+			driver=new EdgeDriver(edgOpt);
+		}
+		if(Browser.equalsIgnoreCase("firefox"))
+		{
+			driver=new FirefoxDriver(fireOpt);
+		}
+		
+		wdriver.set(driver);
+
+		wbdUtil.maximizeWindow(driver);
+		
+		//open application
+		driver.get(Url);
+		wbdUtil.implicitWait(driver, Duration.ofSeconds(10));
+		System.out.println("browser launched sucessfully");
+
+	}
+
+	Login_And_Logout_Vtiger log;
+
+	//login to Application
+	
+	
+	@BeforeMethod(alwaysRun = true)
+	public void loginToApp() throws IOException
+	{
+		String UN = propUtil.readDataFromPropertyFile("username");
+		String PWD = propUtil.readDataFromPropertyFile("password");
+
+		Login_And_Logout_Vtiger log = new Login_And_Logout_Vtiger(driver);
+		log.login(UN, PWD);
+		
+		System.out.println("logged in successfully");
+
+	}
+
+	//logout from application
+
+	@AfterMethod(alwaysRun = true)
+	public void logoutFromApp() throws InterruptedException
+	{
+		
+		Thread.sleep(2000);
+		Logout_page lg = new Logout_page(driver);
+		lg.logoutJSE(driver,wbdUtil);
+		System.out.println("logged out successfully ");
+
+	}
+	// close the Browser 
+	@AfterClass(alwaysRun = true)
+	public void closeBrowser()
+	{
+		driver.quit();
+		System.out.println("browser closed ");
+		wdriver.remove();
+		
+	}
+	//Disconnect the Database
+	@AfterSuite(alwaysRun = true)
+	public void disConnectDB() throws SQLException
+	{
+		dbUtil.disconnectDB();
+		System.out.println("DataBase Disconnected");
+	}
+}
