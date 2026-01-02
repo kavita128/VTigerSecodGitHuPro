@@ -8,6 +8,7 @@ public class edit_organisation {
 		System.out.println("edited by raj");
 		System.out.println("raj second edit");
 		System.out.println("kavita yoga master noooo");
+		System.out.println("I am not a scientist");
 	}
 
 }
